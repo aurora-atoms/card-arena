@@ -1,0 +1,10 @@
+seed: 7
+games: 100
+agents:
+  - random-legal
+  - heuristic-v0
+metrics:
+  - win_rate
+  - invalid_action_rate
+  - timeout_rate
+  - avg_decision_latency_ms
