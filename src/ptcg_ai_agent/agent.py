@@ -14,6 +14,9 @@ class Agent(Protocol):
     def select_action(self, state: GameState, legal_actions: Sequence[Action]) -> Action:
         """Return one legal action for the current state."""
 
+    def reset(self, seed: int | None = None) -> None:
+        """Reset per-game state before a deterministic match."""
+
 
 @dataclass(slots=True)
 class RandomLegalAgent:
@@ -23,6 +26,9 @@ class RandomLegalAgent:
 
     def __post_init__(self) -> None:
         self._rng = random.Random(self.seed)
+
+    def reset(self, seed: int | None = None) -> None:
+        self._rng = random.Random(self.seed if seed is None else seed)
 
     def select_action(self, state: GameState, legal_actions: Sequence[Action]) -> Action:
         if not legal_actions:
@@ -38,6 +44,9 @@ class HeuristicAgent:
     """
 
     name: str = "heuristic-v0"
+
+    def reset(self, seed: int | None = None) -> None:
+        return None
 
     def select_action(self, state: GameState, legal_actions: Sequence[Action]) -> Action:
         if not legal_actions:
@@ -57,5 +66,8 @@ class HeuristicAgent:
             score += 2.0 if cur.energy_attached < 3 else 0.5
         if action.action_type == ActionType.PASS:
             score -= 5.0
+        if cur.active_hp <= 30 and action.action_type == ActionType.RETREAT:
+            score += 4.0
         score += (opp.prizes_remaining - cur.prizes_remaining) * 0.2
+        score -= action.cost
         return score

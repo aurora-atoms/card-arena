@@ -35,6 +35,7 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 pytest
 python -m ptcg_ai_agent.match_runner --games 10 --seed 7
+python -m ptcg_ai_agent.evaluation.league --games 50 --seed 7
 python scripts/check_public_hygiene.py
 ```
 
@@ -46,6 +47,7 @@ python -m venv .venv
 pip install -e ".[dev]"
 pytest
 python -m ptcg_ai_agent.match_runner --games 10 --seed 7
+python -m ptcg_ai_agent.evaluation.league --games 50 --seed 7
 python scripts/check_public_hygiene.py
 ```
 

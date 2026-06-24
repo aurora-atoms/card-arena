@@ -18,3 +18,10 @@ official observation -> adapter -> GameState + legal Action list -> agent -> Act
 - add feature extraction and heuristic scoring logs.
 - add MCTS/search under a strict time budget.
 - add self-play only after deterministic evaluation is stable.
+
+## Adapter acceptance criteria
+
+- core modules do not import official SDK types.
+- adapters expose local `GameState` objects and legal `Action` lists.
+- every selected action is checked against the legal action list before serialization.
+- smoke tests record invalid-action rate and decision latency.
