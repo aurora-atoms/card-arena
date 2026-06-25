@@ -20,3 +20,12 @@ class OfficialAdapter:
 
     def serialize_action(self, action: Action) -> Any:
         raise NotImplementedError("TODO(rule-dependent): map local Action to official payload")
+
+    def smoke_check(self, raw_observation: Any) -> Action:
+        """Parse one observation and return a legal action for integration tests."""
+
+        self.parse_observation(raw_observation)
+        legal_actions = list(self.parse_legal_actions(raw_observation))
+        if not legal_actions:
+            raise ValueError("official adapter produced no legal actions")
+        return legal_actions[0]
