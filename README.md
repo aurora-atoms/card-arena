@@ -6,8 +6,9 @@ This repository is designed for competition-style development: clean adapter bou
 
 ## Status
 
-- `TODO(rule-dependent)`: integrate the official competition starter kit or engine API.
-- Current code uses a toy local state/action interface for smoke tests and baseline development.
+- A synthetic cabt-shaped adapter smoke path parses public-safe observations, preserves legal option metadata, serializes option-index payloads, and records smoke metrics.
+- `TODO(rule-dependent)`: verify official starter-kit licensing, deck initialization, submission packaging, and runtime constraints before using official files.
+- Current league code still uses a toy local state/action interface for baseline development.
 - No official Pokemon assets, card images, proprietary card text database, or private contest data are included.
 
 ## Repository structure
@@ -18,7 +19,7 @@ src/ptcg_ai_agent/
   state.py            toy/public-safe state model and feature encoder
   agent.py            random and heuristic baseline agents
   match_runner.py     deterministic toy match runner for smoke tests
-  adapters/           official starter-kit integration goes here
+  adapters/           cabt-shaped smoke adapter and future starter-kit integration
   training/           self-play/RL placeholders
   evaluation/         baseline league and reports
 configs/              experiment configs
